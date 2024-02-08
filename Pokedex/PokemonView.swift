@@ -9,11 +9,16 @@ import SwiftUI
 
 struct PokemonView: View {
     let urlString: String
+    
     @State var pokemon: Pokemon?
-    @State var imageUrl: URL?
+    
+    var imageUrl: URL? {
+        guard let pokemon else { return .none }
+        return URL(string: pokemon.sprites.front_default)
+    }
     
     var body: some View {
-        VStack {
+        VStack {            
             if let pokemon {
                 if let imageUrl {
                     AsyncImage(url: imageUrl)
@@ -25,7 +30,6 @@ struct PokemonView: View {
             }
         }
         .onAppear {
-            print("onAppear " + urlString)
             Task {
                 guard let url = URL(string: urlString) else {
                     print("Error with URL")
@@ -42,7 +46,6 @@ struct PokemonView: View {
                 do {
                     let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
                     self.pokemon = pokemon
-                    self.imageUrl = URL(string: pokemon.sprites.front_default)
                } catch {
                     print(error.localizedDescription)
                 }
