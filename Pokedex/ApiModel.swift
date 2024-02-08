@@ -23,7 +23,6 @@ class ApiModel {
                 print("Error with URL")
                 return
             }
-            url.lastPathComponent
             
             let (data, response) = try await URLSession.shared.data(from: url)
             
@@ -34,8 +33,6 @@ class ApiModel {
             
             let root = try JSONDecoder().decode(Root.self, from: data)
             self.pokemonLinks = root.results
-            
-            print("Links: \(pokemonLinks)")
         }
 
     }

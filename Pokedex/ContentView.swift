@@ -15,7 +15,7 @@ struct ContentView: View {
             List {
                 ForEach(model.pokemonLinks, id: \.url) { link in
                     NavigationLink {
-                        Text("Item at \(link.url)")
+                        PokemonView(urlString: link.url)
                     } label: {
                         Text(link.name)
                     }
