@@ -11,13 +11,20 @@ struct ContentView: View {
     let model = ApiModel.shared
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationSplitView {
+            List {
+                ForEach(model.pokemonLinks, id: \.url) { link in
+                    NavigationLink {
+                        Text("Item at \(link.url)")
+                    } label: {
+                        Text(link.name)
+                    }
+                }
+            }
+            .navigationTitle(Text("Pokedex"))
+        } detail: {
+            Text("Select an item")
         }
-        .padding()
     }
 }
 

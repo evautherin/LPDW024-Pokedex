@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PokemonLink: Codable {
+struct PokemonLink: Codable, Hashable {
     let name: String
     let url: String
 }

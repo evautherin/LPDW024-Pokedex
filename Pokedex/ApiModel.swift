@@ -23,6 +23,7 @@ class ApiModel {
                 print("Error with URL")
                 return
             }
+            url.lastPathComponent
             
             let (data, response) = try await URLSession.shared.data(from: url)
             
