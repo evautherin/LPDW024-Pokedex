@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    let model = ApiModel.shared
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
