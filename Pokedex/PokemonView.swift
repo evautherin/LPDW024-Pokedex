@@ -27,6 +27,7 @@ struct PokemonView: View {
                 Text(pokemon.name)
             } else {
                 ProgressView()
+                Text("Loading…")
             }
         }
         .onAppear {
