@@ -17,7 +17,11 @@ class ApiModel {
     static let shared = ApiModel()
     var pokemonLinks = [PokemonLink]()
     
-    init() {
+    init(gettingPokemonLinks: Bool = true) {
+        if gettingPokemonLinks { getPokemonLinks() }
+    }
+    
+    func getPokemonLinks() {
         Task {
             guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon") else {
                 print("Error with URL")
@@ -34,6 +38,5 @@ class ApiModel {
             let root = try JSONDecoder().decode(Root.self, from: data)
             self.pokemonLinks = root.results
         }
-
     }
 }

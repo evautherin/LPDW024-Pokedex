@@ -30,8 +30,8 @@ struct PokemonView: View {
                 Text("Loading…")
             }
         }
-        .onAppear {
-            Task {
+        .task {
+            do {
                 guard let url = URL(string: urlString) else {
                     print("Error with URL")
                     return
@@ -44,13 +44,10 @@ struct PokemonView: View {
                     return
                 }
                 
-                do {
-                    let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
-                    self.pokemon = pokemon
-               } catch {
-                    print(error.localizedDescription)
-                }
-                
+                let pokemon = try JSONDecoder().decode(Pokemon.self, from: data)
+                self.pokemon = pokemon
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
